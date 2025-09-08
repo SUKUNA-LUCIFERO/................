@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion - ASK XMD</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #5d3fd3;
+      --secondary: #1e90ff;
+      --accent: #00bfff;
+      --light: #e6f0ff;
+      --dark: #0a1f44;
+      --green: #32CD32;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f0f7ff, #e6f0ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: var(--dark);
+      flex-direction: column;
+    }
+
+    .container {
+      background: white;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .bot-icon {
+      font-size: 60px;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input[type="text"] {
+      padding: 14px 12px;
+      border: 2px solid var(--light);
+      border-radius: 12px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+
+    button {
+      padding: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(93, 63, 211, 0.3);
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .back-btn:hover {
+      color: var(--primary);
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    #result.error {
+      color: #ff4d4d;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      padding: 20px 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 15px;
+      color: white;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    footer h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .social-footer {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .social-footer a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .social-footer a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="bot-icon"><i class="fas fa-robot"></i></div>
+    <h2>🔑 Connexion à ASK XMD</h2>
+
+    <form id="connectForm">
+      <input type="text" name="number" placeholder="Entre ton numéro WhatsApp" required>
+      <button type="submit"><i class="fas fa-sign-in-alt"></i> Se connecter</button>
+    </form>
+
+    <div id="result"></div>
+
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
+  </div>
+
+  <footer>
+    <h3>ASK XMD CMD</h3>
+    <div class="social-footer">
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-telegram-plane"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("connectForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      try {
+        const response = await fetch("/connect", {
+          method: "POST",
+          body: formData
+        });
+        const data = await response.json();
+        const resultDiv = document.getElementById("result");
+
+        if(data.success){
+          resultDiv.classList.remove("error");
+          resultDiv.innerHTML = `🎉 Connexion réussie !<br>Ton code : <b>${data.code}</b>`;
+        } else {
+          resultDiv.classList.add("error");
+          resultDiv.innerHTML = `❌ ${data.message}`;
+        }
+
+      } catch(err) {
+        const resultDiv = document.getElementById("result");
+        resultDiv.classList.add("error");
+        resultDiv.innerHTML = "❌ Erreur serveur. Veuillez réessayer plus tard.";
+      }
+    });
+  </script>
+
+</body>
+</html>
