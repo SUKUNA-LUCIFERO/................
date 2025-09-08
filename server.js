@@ -6,12 +6,6 @@ const path = require("path");
 // import ton module ask-pair-fire
 const startpairing = require("./base-bot/ask-pair-fire.js");
 
-const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.use("/css", express.static(path.join(__dirname, "css")));
-
-
 // Page d’accueil
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
