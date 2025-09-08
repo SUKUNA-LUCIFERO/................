@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Store - ASK XMD Bots</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+:root {
+  --primary: #5d3fd3;
+  --secondary: #1e90ff;
+  --accent: #00bfff;
+  --light: #e6f0ff;
+  --dark: #0a1f44;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg,#f0f7ff,#e6f0ff);
+  color: var(--dark);
+}
+
+header {
+  text-align: center;
+  padding: 25px 15px;
+  background: white;
+  border-bottom: 2px solid var(--light);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  background: linear-gradient(135deg,var(--primary),var(--secondary));
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.store-container {
+  max-width: 1100px;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 0 15px;
+}
+
+.bot-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s;
+}
+
+.bot-card:hover {
+  transform: translateY(-5px);
+}
+
+.bot-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.bot-card .content {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.bot-card h3 {
+  margin: 0 0 10px;
+  color: var(--primary);
+}
+
+.bot-card p {
+  font-size: 0.9rem;
+  margin: 0 0 10px;
+}
+
+.bot-card .stats {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  margin-bottom: 10px;
+}
+
+.bot-card .buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.bot-card .buttons a {
+  flex: 1;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bot-card .buttons a.bot {
+  background: linear-gradient(135deg,var(--primary),var(--secondary));
+}
+
+.bot-card .buttons a.connect {
+  background: linear-gradient(135deg,var(--accent),var(--secondary));
+}
+
+.bot-card .buttons a.download {
+  background: var(--green);
+}
+
+.bot-card .buttons a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.back-btn {
+  display: inline-block;
+  margin: 20px auto;
+  text-decoration: none;
+  padding: 10px 15px;
+  background: var(--light);
+  border-radius: 12px;
+  font-weight: 600;
+  color: var(--dark);
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+footer {
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  background: linear-gradient(135deg,var(--primary),var(--secondary));
+  color: white;
+  border-radius: 12px 12px 0 0;
+}
+
+/* Modal vidéo */
+#videoModal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+#videoModal video {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 12px;
+}
+
+#closeModal {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Page Service Et connexion</h1>
+  <p>Accédez aux bots et téléchargez vos fichiers favoris</p>
+</header>
+
+<div class="store-container">
+  <!-- Bot 1 -->
+  <div class="bot-card">
+    <img src="https://files.catbox.moe/n484p7.jpg" alt="Bot 1">
+    <div class="content">
+      <h3>ASK XMD v1.14.15</h3>
+      <p>Bot officiel pour se connecter à WhatsApp via ASK XMD Version disponible sans les bug Bêta mise à jour dans une semaine.</p>
+      <div class="stats">Utilisateurs aujourd'hui : <span id="users-bot1">0</span></div>
+      <div class="buttons">
+        <a href="#" class="bot" data-video="https://files.catbox.moe/TON_FICHIER_VIDEO.mp4"><i class="fas fa-robot"></i> Voir Bot</a>
+        <a href="connect.html" class="connect"><i class="fas fa-sign-in-alt"></i> Connecter</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bot 2 -->
+  <div class="bot-card">
+    <img src="https://files.catbox.moe/p81opd.jpg" alt="Bot 2">
+    <div class="content">
+      <h3>META DEATH V1</h3>
+      <p>Meta Death est un Bug Bot WhatsApp pour attaque et Bugue Des cible bien pressise pas encore disponible 😞.</p>
+      <div class="stats">Utilisateurs aujourd'hui : <span id="users-bot2">0</span></div>
+      <div class="buttons">
+        <a href="" class="bot" data-video="https://files.catbox.moe/TON_FICHIER_VIDEO2.mp4"><i class="fas fa-robot"></i> Voir Bot</a>
+        <a href="error.html" class="connect"><i class="fas fa-sign-in-alt"></i> Connecter</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fichiers -->
+  <div class="bot-card">
+    <img src="https://catbox.moe/image.png" alt="Téléchargement">
+    <div class="content">
+      <h3>Fichiers Bot</h3>
+      <p>Téléchargez les fichiers nécessaires pour vos bots ASK XMD.</p>
+      <div class="stats">Téléchargements aujourd'hui : <span id="downloads">0</span></div>
+      <div class="buttons">
+        
+       <a href="error.html" class="connect"><i class="fas fa-download"></i>Télécharger Le fichie</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Retour à l'accueil</a>
+
+<footer>
+  <p>&copy; 2025 ASK TECH | Tous droits réservés</p>
+</footer>
+
+<!-- Modal vidéo -->
+<div id="videoModal">
+  <span id="closeModal">&times;</span>
+  <video id="botVideo" controls></video>
+</div>
+
+<script>
+// Compteurs
+let bot1Users = 0;
+let bot2Users = 0;
+let likesBot1 = 0;
+let likesBot2 = 0;
+
+// Voir Bot (vidéo)
+document.querySelectorAll('.bot-card .buttons a.bot').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    video.src = btn.dataset.video;
+    modal.style.display = 'flex';
+    video.play();
+  });
+});
+
+// Connecter avec incrément et redirection
+document.querySelectorAll('.bot-card .buttons a.connect').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const botCard = btn.closest('.bot-card');
+    if(botCard.querySelector('#users-bot1')){
+      bot1Users++;
+      document.getElementById('users-bot1').textContent = bot1Users;
+      localStorage.setItem('bot1Users', bot1Users);
+    } else if(botCard.querySelector('#users-bot2')){
+      bot2Users++;
+      document.getElementById('users-bot2').textContent = bot2Users;
+      localStorage.setItem('bot2Users', bot2Users);
+    }
+    setTimeout(() => window.location.href = btn.href, 100); // redirection après 100ms
+  });
+});
+
+// Likes
+document.querySelectorAll('.bot-card .buttons a.like').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const botCard = btn.closest('.bot-card');
+    if(botCard.querySelector('#likes-bot1')){
+      likesBot1++;
+      document.getElementById('likes-bot1').textContent = likesBot1;
+      localStorage.setItem('likesBot1', likesBot1);
+    } else if(botCard.querySelector('#likes-bot2')){
+      likesBot2++;
+      document.getElementById('likes-bot2').textContent = likesBot2;
+      localStorage.setItem('likesBot2', likesBot2);
+    }
+  });
+});
+
+// Charger likes et clics depuis localStorage au chargement
+document.addEventListener('DOMContentLoaded', () => {
+  bot1Users = parseInt(localStorage.getItem('bot1Users')) || 0;
+  bot2Users = parseInt(localStorage.getItem('bot2Users')) || 0;
+  likesBot1 = parseInt(localStorage.getItem('likesBot1')) || 0;
+  likesBot2 = parseInt(localStorage.getItem('likesBot2')) || 0;
+
+  document.getElementById('users-bot1').textContent = bot1Users;
+  document.getElementById('users-bot2').textContent = bot2Users;
+  document.getElementById('likes-bot1').textContent = likesBot1;
+  document.getElementById('likes-bot2').textContent = likesBot2;
+});
+</script>
+</body>
+</html>
