@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASK XMD - Connexion WhatsApp</title>
+  <style>
+    :root {
+      --primary: #5d3fd3;
+      --secondary: #1e90ff;
+      --accent: #00bfff;
+      --light: #e6f0ff;
+      --dark: #0a1f44;
+      --green: #32CD32;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #f0f7ff, #e6f0ff);
+      color: var(--dark);
+    }
+
+    /* --- NAV BAR --- */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 12px 18px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    nav .links {
+      display: flex;
+      gap: 12px;
+    }
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: 0.2s;
+    }
+    nav a:hover {
+      background: var(--light);
+    }
+
+    /* --- MENU TROIS POINTS --- */
+    .menu {
+      position: relative;
+    }
+    .menu-btn {
+      font-size: 1.3rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--dark);
+    }
+    .menu-list {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: none;
+      flex-direction: column;
+      min-width: 140px;
+      overflow: hidden;
+    }
+    .menu-list a {
+      padding: 10px;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .menu-list a:hover {
+      background: var(--light);
+      color: var(--primary);
+    }
+    .menu.open .menu-list {
+      display: flex;
+    }
+
+    /* --- CONTENU --- */
+    section {
+      display: none;
+    }
+    section.active {
+      display: block;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding: 25px 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(93, 63, 211, 0.15);
+      border: 2px solid var(--light);
+    }
+    .logo {
+      font-size: 3.2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 5px;
+    }
+    h1 {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 10px 0;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    .subtitle {
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .btn-main {
+      display: block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 16px;
+      margin: 25px 0;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(93, 63, 211, 0.3);
+    }
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 6px 18px rgba(30, 144, 255, 0.1);
+      border-left: 5px solid var(--secondary);
+    }
+    h2 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: white;
+      padding: 18px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+    }
+    
+      .social-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: white;
+      text-decoration: none;
+      padding: 12px 15px;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--secondary), #4a9fff);
+      box-shadow: 0 4px 10px rgba(30, 144, 255, 0.3);
+    }
+    
+    .social-link:nth-child(2n) {
+      background: linear-gradient(135deg, var(--primary), #7a5af5);
+    }
+    
+    .social-link:nth-child(3n) {
+      background: linear-gradient(135deg, var(--accent), #00d4ff);
+    }
+    
+    .social-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  
+  <!-- NAV BAR -->
+  <nav>
+    ASK TECH && NIDE DEV VOIR LA NAV BARE 👉
+    <div class="menu">
+      <button class="menu-btn" onclick="toggleMenu()">⋮</button>
+      <div class="menu-list">
+        <a href="#" onclick="showPage('home')">Accueil</a>
+        <a href="#" onclick="showPage('about')">À propos</a>
+        <a href="#" onclick="showPage('contact')">Contact</a>
+        <a href="store.html">Connect-store</a>
+        <a href=""></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE ACCUEIL -->
+  <section id="home" class="active">
+    <header>
+      <div class="logo"><i class="fas fa-robot"></i></div>
+      <h1>DEV ASK TECH</h1>
+      <p class="subtitle">Sur cette plateforme vous pouvez vous connect a tout les bot crée par Dev Ask Et l'équipe Nide Dev</p>
+    </header>
+    <a href="store.html" class="btn-main"><i class="fas fa-bolt"></i> Accede a La page de service Bot</a>
+  </section>
+
+  <!-- PAGE À PROPOS -->
+  <section id="about">
+    <div class="card">
+      <h2><i class="fas fa-star" style="color: var(--accent);"></i> À propos</h2>
+      <p>Service <span class="highlight">officiel ASK XMD</span> pour une connexion <span class="highlight">ultra-rapide</span> et <span class="highlight">sécurisée</span> à WhatsApp.</p>
+    </div>
+  </section>
+
+  <!-- PAGE CONTACT -->
+  <section id="contact">
+      <div class="card">
+    <h2><i class="fab fa-whatsapp" style="color: #25D366;"></i> Nos réseaux</h2>
+    <div class="social-links">
+      <a href="https://whatsapp.com/channel/askxmd1" class="social-link" target="_blank">
+        <i class="fas fa-bullhorn"></i> Chaîne Officielle WhatsApp 
+      </a>
+      <a href="https://whatsapp.com/group/askxmd-support" class="social-link" target="_blank">
+        <i class="fas fa-headset"></i> Support telegram
+      </a>
+      <a href="https://whatsapp.com/channel/askxmd-news" class="social-link" target="_blank">
+        <i class="fas fa-newspaper"></i> Actualités
+      </a>
+      <a href="https://whatsapp.com/group/askxmd-community" class="social-link" target="_blank">
+        <i class="fas fa-users"></i> Communauté
+      </a>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h2><i class="fas fa-handshake" style="color: var(--secondary);"></i> Partenaires</h2>
+    <p>Développé par <span class="partner">Dev Ask</span> en collaboration avec <span class="partner">Nide Dev</span></p>
+  </div>
+  
+    <div class="card">
+      <h2><i class="fas fa-envelope" style="color: var(--accent);"></i> Contact</h2>
+      <p><i class="fas fa-at"></i> contact@askxmd.com</p>
+      <p><i class="fas fa-phone"></i> +241 77 47 42 64</p>
+      <p><i class="fas fa-phone"></i> +241 74 26 55 27</p>
+      <p><i class="fas fa-phone"></i> +241 77 47 42 64</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><i class="fas fa-copyright"></i> 2025 A ASK TECH | Tous droits réservés</p>
+    <p style="margin-top: 8px; font-weight: 600;">Power by <span style="color: var(--accent);">ASK TECT | DEV ASK | NIDE DEV</span></p>
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+      document.querySelector(".menu").classList.remove("open");
+    }
+    function toggleMenu() {
+      document.querySelector(".menu").classList.toggle("open");
+    }
+  </script>
+
+</body>
+</html>
