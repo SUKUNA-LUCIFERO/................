@@ -1,0 +1,17 @@
+{
+  "120363418149930612@g.us": {
+    "antipromote": true,
+    "antidemote": true
+  },
+  "120363415820863126@g.us": {
+    "antipromote": false,
+    "antidemote": false,
+    "antipurge": true
+  },
+  "120363418488387454@g.us": {
+    "antipurge": true
+  },
+  "120363369337789551@g.us": {
+    "antipurge": false
+  }
+}
